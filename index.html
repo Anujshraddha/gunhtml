@@ -8,235 +8,619 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
-    @import url('https://fonts.googleapis.com/css?family=Montserrat');
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+:root {
+  font-size: 16px;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+}
 
 * {
-    font-family: 'Montserrat', sans-serif;
-    outline: 0;
-    transition: .3s;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body {
-    display: flex;
-    flex-direction: row-reverse;
+div {
+  display: -webkit-box;
+  display: flex;
 }
 
-h2 {
-    font-weight: bolder;
-    text-align: center;
-}
-    
-    right: 0;
-    width: 10em;
-    padding: 1em 1em;
-    margin: 0.5em;
-    background: #7762ff;
-    color: white;
-    transition: background .5s;
-    border-radius: 4px; 
+button {
+  border: none;
+  background: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
-.cart-button-style-two {
-    border-style: none;
-    position: fixed;
+.banner {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#8942a8),
+    to(#ba382f)
+  );
+  background: linear-gradient(to left, #8942a8, #ba382f);
+  overflow: hidden;
+  .stock-limit {
+    position: absolute;
     top: 0;
+    left: 0;
     right: 0;
-    width: 10em;
-    padding: 1em 1em;
-    margin: 0.5em;
-    background: white;
-    color: #7762ff;
-    transition: background .5s;
-    border-radius: 4px; 
-}
-
-.cart-button-style:hover, #checkout:hover, #apply-promo:hover, .keep-shopping:hover {
-    background: #62ff8e;
-    color: white;
-}
-
-.cart-button-style:active, #checkout:active, #apply-promo:active, .keep-shopping:active {
-    background: #ff6884;
-    color: white;
-}
-    
-.products {
-    float: left;
-    width: 23%;
-    margin: 3% 1%;
-    text-align: center;
-    padding: 0 0 1% 0;
-}
-
-.products img {
-    width: 100%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-@media screen and (max-width: 980px) {
-    .products {
-        width: 30%;
-        text-align: center;
-        margin: 1.66%;
-    }
-}
-
-@media screen and (max-width: 790px) {
-    .products {
-        width: 47%;
-        margin: 1% 1%;
-    }
-
-@media screen and (max-width: 600px) {
-    .products {
-        width: 100%;
-    }
-    
-    #shop {
-        margin: 2% 0;
-    }
-}
-
-#shop::after {
-    content: '';
-    display: block;
-    clear: both;
-}
-
-.add-to-cart {
-    display: block;
-    margin: 1% auto;
-    border-style: none;
-    width: 10em;
-    height: 3em;
-    background: #62ff8e;
-    color: white;
-    font-weight: bold;
+    bottom: 0;
+    margin: auto;
     border-radius: 20px;
-}
-  
-.add-to-cart:hover {
-    background: #7762ff;
-}
-
-.add-to-cart:active {
-    background: #62ff8e;
-}
-
-.slider {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    overflow: hidden;
-    background: white;
-    transition: all 1s;
-}
-
-.slider.close {
-    top: 100vh;
-    height: 0;
-}
-
-#amount-controls {
-    background: white;
-    top: 90;
-    right: 0;
-}
-
-#cart-amount-wrapper {
-    background: white;
-    padding: 1.5% 0 .5% 35%;
-    border-radius: 10px;
-}
-
-#cart {
-    text-align: left;
-    margin: 3.5em 0.5em;
-    padding: 0.5% 1.5%;
-    overflow-y: scroll;
+    background-color: #010101;
+    width: 400px;
+    height: 180px;
+    flex-direction: column;
+    display: none;
+    em {
+      position: absolute;
+      width: 80%;
+      top: 20%;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      line-height: 1.5rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
   }
+}
+.banner .cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
 
-.updated-price-col {
-    width: 25%;
+  backdrop-filter: blur(5px);
+  display: none;
 }
 
-.update-col {
-    width: 10%
+.box-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
 }
 
-.remove-col {
-  width: 5%;
+.box-area li {
+  position: absolute;
+  display: block;
+  list-style: none;
+  width: 25px;
+  height: 25px;
+  background: white;
+  overflow: hidden;
+  -webkit-animation: animation 20s linear infinite;
+  animation: animate 20s linear infinite;
+  bottom: -120px;
 }
 
-#update {
-    border-style: none;
-    text-transform: uppercase;
-    padding: 2% 12px;
+.box-area li:nth-child(1) {
+  left: 86%;
+  width: 80px;
+  height: 80px;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+
+.box-area li:nth-child(2) {
+  left: 12%;
+  width: 30px;
+  height: 30px;
+  -webkit-animation-delay: 1.5s;
+  animation-delay: 1.5s;
+  -webkit-animation-duration: 10s;
+  animation-duration: 10s;
+}
+
+.box-area li:nth-child(3) {
+  left: 70%;
+  width: 100px;
+  height: 100px;
+  -webkit-animation-delay: 5.5s;
+  animation-delay: 5.5s;
+}
+
+.box-area li:nth-child(4) {
+  left: 42%;
+  width: 150px;
+  height: 150px;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+  -webkit-animation-duration: 15s;
+  animation-duration: 15s;
+}
+
+.box-area li:nth-child(5) {
+  left: 65%;
+  width: 40px;
+  height: 40px;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+
+.box-area li:nth-child(6) {
+  left: 15%;
+  width: 110px;
+  height: 110px;
+  -webkit-animation-delay: 3.5s;
+  animation-delay: 3.5s;
+  -webkit-animation-duration: 15s;
+  animation-duration: 15s;
+}
+
+@-webkit-keyframes animate {
+  0% {
+    -webkit-transform: translateY(0) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-100vh) rotate(360deg);
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+@keyframes animate {
+  0% {
+    -webkit-transform: translateY(0) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-100vh) rotate(360deg);
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+.fa-shopping-cart {
+  position: absolute;
+  right: 2rem;
+  top: 1.2rem;
+  color: black;
+}
+.fa-shopping-cart:hover {
+  color: white;
+}
+.total-qty {
+  position: absolute;
+  height: 1rem;
+  width: 1rem;
+  background: white;
+  color: black;
+  border-radius: 50%;
+  border: 1px solid white;
+  text-align: center;
+  line-height: 1rem;
+  font-weight: 600;
+  top: 1rem;
+  right: 1.5rem;
+
+  user-select: none;
+}
+.main-cart {
+  position: absolute;
+  -webkit-box-pack: space-evenly;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 90%;
+  height: 100%;
+  margin-left: 5%;
+  align-self: center;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.card {
+  position: relative;
+  flex-shrink: 0;
+  height: 300px;
+  width: 200px;
+  background-color: #010101;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 7px 5px -5px #4d4b4b;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  .img-container {
+    position: absolute;
+    height: 185px;
+    width: 185px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    transform: translateY(35px);
+    img {
+      width: 100%;
+      align-self: center;
+    }
+    .out-of-stock-cover {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.25);
+
+      justify-content: center;
+      align-items: center;
+      display: none;
+      span {
+        font-weight: 900;
+        color: rgba(255, 200, 200, 0.75);
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+.top-bar {
+  transform: translateY(0.5rem);
+  width: 100%;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 1rem;
+  .fa-apple {
+    font-size: 1.5rem;
+  }
+  .stocks {
+    font-size: 0.8rem;
+    color: lightgreen;
+  }
+}
+.card .details {
+  position: absolute;
+  height: 220px;
+  width: 100%;
+  background-color: #2e2f33;
+  border-radius: 20px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  padding: 20px;
+  bottom: -165px;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.card .details .name-fav {
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+.card .details .name-fav strong {
+  font-weight: 600;
+}
+
+.fav {
+  color: red;
+}
+
+.card .details .wrapper {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-transform: translateY(5px);
+  transform: translateY(5px);
+  display: none;
+}
+
+.details .wrapper p {
+  font-size: 0.9rem;
+  padding: 5px 0;
+  font-weight: light;
+}
+
+.card .details .purchase {
+  width: 100%;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.card .details .purchase p {
+  font-weight: 500;
+}
+
+.details .purchase .add-btn {
+  border-radius: 20px;
+  border: 1px solid white;
+  background: none;
+  color: white;
+  padding: 6px 10px;
+}
+
+.details .purchase .add-btn:hover {
+  background: white;
+  color: black;
+}
+
+.main-cart .card:hover {
+  height: 450px;
+  width: 260px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.main-cart .card:hover .details {
+  bottom: 0;
+}
+
+.main-cart .card:hover .wrapper {
+  display: block;
+}
+
+.side-nav {
+  position: absolute;
+  background: #010101;
+  opacity: 0.95;
+  height: 100%;
+  width: 60%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  top: 0;
+  right: -100%;
+  z-index: 10;
+  overflow: hidden;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.side-nav .fa-times {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 1.5rem;
+}
+
+.side-nav h2 {
+  align-self: center;
+  -webkit-transform: translateY(1rem);
+  transform: translateY(1rem);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.side-nav .cart-items {
+  position: absolute;
+  width: 90%;
+  margin: 0 5%;
+  height: 50%;
+  top: 10%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  .empty-cart {
+    margin: auto 0;
+    font-size: 2rem;
+    font-weight: 900;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.25);
+  }
+}
+.side-nav .cart-items .cart-item {
+  height: 5rem;
+  width: 100%;
+  -webkit-box-align: center;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid whitesmoke;
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+  .cart-img {
+    width: 5rem;
+    height: 5rem;
+    justify-content: center;
+    img {
+      width: 100%;
+      align-self: center;
+    }
+  }
+}
+
+.side-nav .final {
+  position: absolute;
+  align-self: flex-end;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  bottom: 10%;
+}
+
+.side-nav .final strong {
+  align-self: flex-end;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-right: 20px;
+  margin-bottom: 1rem;
+}
+
+.side-nav .final .action {
+  -webkit-box-pack: space-evenly;
+  justify-content: space-evenly;
+}
+
+.side-nav .final .action .btn {
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  border: 1px solid white;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.side-nav .final .action .btn:hover {
+  color: black;
+  box-shadow: inset 20em 0 0 0 white;
+}
+
+.qty-change {
+  -webkit-box-pack: space-evenly;
+  justify-content: space-evenly;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+}
+
+.btn-qty {
+  border: 1px solid white;
+  border-radius: 50%;
+  padding: 2px 5px;
+  &:hover {
+    background: white;
+    color: black;
+  }
+}
+
+.qty {
+  padding: 2px 5px;
+}
+.invoice {
+  position: absolute;
+  height: 90%;
+  width: 90%;
+  background: rgba(0, 0, 0, 0.95);
+  padding: 5% 4%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  align-self: center;
+  flex-direction: column;
+  border-radius: 20px;
+  transition: 0.25s;
+  .shipping-items {
+    padding: 10px 0;
     width: 100%;
-    height: 30px;
-    background: #56ff6a;
-    color: white;
-    border-radius: 10px;
+    justify-content: space-between;
+    .item-names,
+    .items-price {
+      flex-direction: column;
+      justify-content: space-around;
+    }
+  }
+  .payment {
+    flex-direction: column;
+    em,
+    div {
+      margin-top: 10px;
+      font-weight: 600;
+      justify-content: space-between;
+    }
+  }
+  .order {
+    position: absolute;
+    bottom: 10%;
+    width: 40%;
+    justify-content: space-around;
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-size: 1.2rem;
+    }
+    .btn-order {
+      background: #00bbf9;
+    }
+    .btn-cancel {
+      background: #bb342f;
+    }
+  }
+  .order-details {
+    height: 300px;
+    flex-direction: column;
+    justify-content: space-around;
+    em,
+    p {
+      border-bottom: 1px dashed white;
+      padding-bottom: 10px;
+    }
+    em {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    .thanks {
+      position: absolute;
+      text-align: center;
+      margin: auto;
+      border: none;
+      left: 0;
+      right: 0;
+      bottom: 55%;
+    }
+    p {
+      font-size: 1.1rem;
+      span {
+        font-weight: 600;
+      }
+    }
+  }
 }
-
-#update:hover {
-    background: #f0ffe6;
-    color: #56ff6a;
+.btn-ok {
+  position: absolute;
+  width: 80%;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  margin: auto;
+  bottom: 10%;
+  left: 0;
+  right: 0;
+  background: #5bc0be;
 }
-
-#update:active {
-    background: #56f46a;
-    color: white;
+@media (max-width: 768px) {
+  .side-nav {
+    width: 80%;
+  }
+  .invoice .order {
+    width: 60%;
+  }
+  .main-cart {
+    overflow: scroll;
+  }
 }
-
-.remove {
-    border-style: none;
-    font-weight: bolder;
-    padding: 2% 2.5%;
+@media (max-width: 576px) {
+  .side-nav {
     width: 100%;
-    height: 30px;
-    background: #ff7b67;
-    color: #fff1e7;
-    border-radius: 10px;
+    .cart-img {
+      display: none;
+    }
+  }
+  .invoice .order {
+    width: 80%;
+  }
+  .nav {
+    width: 576px;
+    height: 4rem;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    filter: invert(1);
+  }
+  .main-cart {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    height: 95%;
+    top: 4rem;
+
+    .card {
+      margin: 20px auto;
+    }
+  }
 }
 
-.remove:hover {
-    background: #fff1e7;
-    color: #ff7b67;
-}
-  
-.remove:active {
-    background: #ff7b67;
-    color: #f5f1e7;
-}
-
-#cart-products-wrapper {
-    overflow-y: auto;
-}
-
-#cart-amount-wrapper {
-    overflow-x: auto;
-}
-
-#promo {
-    width: 10em;
-    padding: 1em 1em;
-    transition: background .5s;
-    border-radius: 4px;
-}
-
-#apply-promo, #checkout, .keep-shopping {
-    border-style: none;
-    width: 10em;
-    padding: 1em 1em;
-    background: #7762ff;
-    color: white;
-    transition: background .5s;
-    border-radius: 4px;
-}
-  
   </style>
 </head>
 <body>            
@@ -262,119 +646,7 @@ h2 {
         </div>
       </div>
     </div>          
-<div>
-        <h2>Shop With Ease</h2>
-        
-        <button id='cart-button' class="trigger cart-button-style">Show Cart</button>
-        
-        
-        <div id="shop">
-            
-            <div class="products ios apple" id="iphone-x">
-                <img class="product-image" src="http://via.placeholder.com/200x200">
-                <p class="product-name">iPhone X</p>
-                <p class="product-description">A 5.5" beast of processing power from Apple.</p>
-                <p class="product-price" value='999'>999</p>
-                <button class="add-to-cart" id='test'>ADD TO CART</button>
-            </div>
- 
-            <div class="products android samsung" id="samsung-s9">
-                <img class="product-image" src="http://via.placeholder.com/200x200">
-                <p class="product-name">Samsung S9</p>
-                <p class="product-description">The most powerful Android device on the planet.</p>
-                <p class="product-price" value='789'>789</p>
-                <button class="add-to-cart">ADD TO CART</button>
-            </div>
-            
-            <div class="products android google" id="pixel-2">
-                <img class="product-image" src="http://via.placeholder.com/200x200">
-                <p class="product-name">Pixel 2</p>
-                <p class="product-description">The perfect phone for a clean Android experience</p>
-                <p class="product-price" value='876'>876</p>
-                <button class="add-to-cart">ADD TO CART</button>
-            </div>
-          
-              <div class="products android oneplus" id="oneplus-6">
-                <img class="product-image" src="http://via.placeholder.com/200x200">
-                <p class="product-name">Oneplus 6</p>
-                <p class="product-description">The latest from a long line of affordable premium devices by Oneplus</p>
-                <p class="product-price" value='799'>799</p>
-                <button class="add-to-cart">ADD TO CART</button>
-            </div>
-            
-            <div class="products ios apple" id="iphone-8">
-                <img class="product-image" src="http://via.placeholder.com/200x200">
-                <p class="product-name">iPhone 8</p>
-                <p class="product-description">The little, less-stylish brother of the iPhone X.</p>
-                <p class="product-price" value='719'>719</p>
-                <button class="add-to-cart">ADD TO CART</button>
-            </div>
-              
-            <div class="products android huawei" id="huawei-p20">
-                <img class="product-image" src="http://via.placeholder.com/200x200">
-                <p class="product-name">Huawei P20</p>
-                <p class="product-description">A solid performer from the chinese giant Huawei.</p>
-                <p class="product-price" value='769'>769</p>
-                <button class="add-to-cart">ADD TO CART</button>
-            </div>
-            
-            <div class="products android lg" id="lg-g7">
-                <img class="product-image" src="http://via.placeholder.com/200x200">
-                <p class="product-name">LG G7 ThinQ</p>
-                <p class="product-description">The latest and most powerful smartphone from LG.</p>
-                <p class="product-price" value='699'>699</p>
-                <button class="add-to-cart">ADD TO CART</button>
-            </div>
-            
-            <div class="products android huawei" id="huawei-mate-10-pro">
-                <img class="product-image" src="http://via.placeholder.com/200x200">
-                <p class="product-name">Huawei Mate 10 Pro</p>
-                <p class="product-description">The most powerful Android device yet from Huawei.</p>
-                <p class="product-price" value='899'>899</p>
-                <button class="add-to-cart">ADD TO CART</button>
-            </div>
-        </div>
-  
-                           <th class="remove-col">Remove</th>
-                    </thead>
-                    <tbody id="cart-table-body"></tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <div id='amount-controls'>
-                <div id="cart-amount-wrapper">
-                    <table>
-                        <tbody>
-                            <tr id='subtotal-wrappper'>
-                                <td id="subtotal-label">Subtotal:</td>
-                                <td id="subtotal">0.00</td>
-                            </tr>
-
-                            <tr id='total-wrapper'>
-                                <td id="total-label">Total:</td>
-                                <td id="total">0.00</td>
-                            </tr>
-
-                            <tr id="promo-checkout">
-                                <td id="promo-wrapper">
-                                    <input id="promo" placeholder="Input Promo Code">
-                                    <button id="apply-promo">Apply Promo</button>
-                                </td>
-
-                                <td>
-                                    <button id="checkout">Checkout</button>
-                                </td>
-                                
-                                <td>
-                                    <button id="ks" class="keep-shopping">Keep Shopping</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+    <div id='app'></div>
 
   <!-- Add CDNs: dependencies are prefered to be included locally with the app for pretection and to work offline first -->
   <!-- jQuery: can use React/Vue instead -->
@@ -404,83 +676,471 @@ h2 {
       // user.auth(username, password)
       user.auth($('#alias').val(), $('#pass').val());
     });
+    
+    const productDetails = [
+  {
+    name: "Airpods Pro",
+    price: 24900,
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTJiKtlpQGkIeOyAPV3qQMNkl8uuRzfGWZtIDb_WgDnam8WjhpL&usqp=CAU",
+    qty: 10,
+    heading: "Wireless Noise Cancelling Earphones",
+    des:
+      "AirPods Pro have been designed to deliver active Noise Cancellation for immersive sound. Transparancy mode so much can hear your surroundings."
+  },
+  {
+    name: "Apple Watch",
+    price: 40900,
+    imageUrl: "https://purepng.com/public/uploads/large/apple-watch-pcq.png",
+    qty: 15,
+    heading: "You’ve never seen a watch like this",
+    des:
+      "The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international emergency calling, fall detection and a built‑in compass."
+  },
+  {
+    name: "Macbook Pro",
+    price: 199900,
+    imageUrl: "https://pngimg.com/uploads/macbook/macbook_PNG8.png",
+    qty: 20,
+    heading: "The best for the brightest",
+    des:
+      "Designed for those who defy limits and change the world, the new MacBook Pro is by far the most powerful notebook we’ve ever made. it’s the ultimate pro notebook for the ultimate user."
+  },
+  {
+    name: "iPhone 11 pro",
+    price: 106600,
+    imageUrl:
+      "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-11-pro-midnight-green-select-2019?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1566954990073",
+    qty: 35,
+    heading: "Pro cameras. Pro display. Pro performance",
+    des:
+      "A mind‑blowing chip that doubles down on machine learning and pushes the boundaries of what a smartphone can do. Welcome to the first iPhone powerful enough to be called Pro."
+  },
+  {
+    name: "iPad Pro",
+    price: 71900,
+    imageUrl:
+      "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-pro-12-select-wifi-spacegray-202003_FMT_WHH?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1583553704156",
+    qty: 25,
+    heading: "Your next computer is not a computer",
+    des:
+      "It’s a magical piece of glass. It’s so fast most PC laptops can’t catch up. And you can use it with touch, pencil, keyboard and now trackpad. It’s the new iPad Pro."
+  }
+];
+const cartDetails = [];
 
-    // ------ Save a todo to DB on form submit
-    $('#todo-form').on('submit', function(e){
-      // check user is logged in
-      if(!user.is){ return }
-      // get Todo input
-      var input = $('#todo-input')
-      // add item to a table inside the 'said' document on the user graph
-      user.get('todos').set({text: input.val()})
-      // clear input
-      input.val('')
-      // stop page relaod
-      e.preventDefault()
-    });
+//click events {
+function addItem(event) {
+  let btnClicked =
+    event.parentElement.parentElement.parentElement.parentElement.parentElement;
+  let noStocks = btnClicked.getElementsByClassName("out-of-stock-cover")[0];
+  if (noStocks.style.display == "flex") return;
+  let name = btnClicked.getElementsByClassName("product-name")[0].innerText;
+  let price = parseFloat(
+    btnClicked
+      .getElementsByClassName("product-price")[0]
+      .innerText.replace("₹ ", "")
+  );
+  let imgSrc = btnClicked.getElementsByClassName("product-img")[0].src;
+  SwitchBtns(btnClicked);
+  let cartItem = {
+    name,
+    price,
+    imgSrc,
+    qty: 1
+  };
+  CartItems(cartItem);
+  cartDetails.push(cartItem);
+  RenderCart();
+  CartItemsTotal();
+}
 
-    // ------ Show Todos and listen for DB changes (add/edit/delete)
-    function UI(todo, id) { // function is called 'ForEach' (todo, id) in DB
-      // check if there is already a 'li' with that id on page
-      var li = $(`li[id="${id}"]`);
-      // if it doesn't exist, append a new 'li' with that id to 'ul'
-      if (!li.get(0)) {
-        li = $('<li>').attr('id', id).attr('class', "alert alert-success").appendTo('ul');
-      }
-
-      if (todo) {
-        var html = ''
-        // append a checkbox for setting the state
-        html = '<input type="checkbox" onclick="clickCheck(this)" ' + (todo.done ? 'checked' : '') + '>'
-        // append clickable img for deletion
-        html += '<img onclick="clickDelete(this)" src="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-x.svg"/>'
-        // create a clickable span for editting text
-        html += '<span onclick="clickText(this)">' + todo.text + '</span>'
-        // add html to 'li'
-        li.html(html)
-      } else {
-          // remove 'li' from page
-          li.remove()
+function removeItem(event) {
+  let btnClicked = event.parentElement;
+  let itemName = btnClicked.getElementsByClassName("name")[0].innerText;
+  let productNames = document.getElementsByClassName("product-name");
+  cartDetails.forEach((item, i) => {
+    if (itemName == item.name) {
+      cartDetails.splice(i, 1);
+      for (let name of productNames) {
+        if (itemName == name.innerText) {
+          let found = name.parentElement.parentElement;
+          SwitchBtns(found);
         }
-    }
-
-    // ------ Enable Todo edit on Todo click
-    function clickText (element) { // element = <span>
-      // get the Todo <span> clicked
-      element = $(element)
-      // turn text into input for text edit, if not already an input (already clicked)
-      if (!element.find('input').get(0)) {
-        element.html('<input value="' + element.html() + '" onkeyup="keypressText(this)">')
       }
     }
-    // ------ Save Todo edit on 'Enter' release
-    function keypressText (element) { // element = <input>
-      // check if key released in 'Enter'
-      if (event.keyCode === 13) {
-        // in 'todos' where 'id' update 'title' to input value
-        // todos.get(id).put({title:text})
-        user.get('todos').get($(element).parent().parent().attr('id')).put({text: $(element).val()})
+  });
+  RenderCart();
+  CartIsEmpty();
+  CartItemsTotal();
+}
+
+function clearCart() {
+  ToggleBackBtns();
+  cartDetails.length = 0;
+  RenderCart();
+  CartIsEmpty();
+  CartItemsTotal();
+}
+
+function qtyChange(event, handler) {
+  let btnClicked = event.parentElement.parentElement;
+  let isPresent = btnClicked.classList.contains("btn-add");
+  let itemName = isPresent
+    ? btnClicked.parentElement.parentElement.getElementsByClassName(
+        "product-name"
+      )[0].innerText
+    : btnClicked.parentElement.getElementsByClassName("name")[0].innerText;
+  let productNames = document.getElementsByClassName("product-name");
+  for (let name of productNames) {
+    if (itemName == name.innerText) {
+      let productBtn = name.parentElement.parentElement.getElementsByClassName(
+        "qty-change"
+      )[0];
+      cartDetails.forEach((item, i) => {
+        if (itemName == item.name) {
+          if (handler == "add" && item.qty < 10) {
+            item.qty += 1;
+            btnClicked.innerHTML = QtyBtn(item.qty);
+            productBtn.innerHTML = QtyBtn(item.qty);
+          } else if (handler == "sub") {
+            item.qty -= 1;
+            btnClicked.innerHTML = QtyBtn(item.qty);
+            productBtn.innerHTML = QtyBtn(item.qty);
+            if (item.qty < 1) {
+              cartDetails.splice(i, 1);
+              productBtn.innerHTML = AddBtn();
+              productBtn.classList.toggle("qty-change");
+            }
+          } else {
+            document.getElementsByClassName("purchase-cover")[0].style.display =
+              "block";
+            document.getElementsByClassName("stock-limit")[0].style.display =
+              "flex";
+            sideNav(0);
+          }
+        }
+      });
+    }
+  }
+  RenderCart();
+  CartIsEmpty();
+  CartItemsTotal();
+}
+
+function limitPurchase(event) {
+  document.getElementsByClassName("purchase-cover")[0].style.display = "none";
+  event.parentElement.style.display = "none";
+  sideNav(1);
+}
+
+function sideNav(handler) {
+  let sideNav = document.getElementsByClassName("side-nav")[0];
+  let cover = document.getElementsByClassName("cover")[0];
+  sideNav.style.right = handler ? "0" : "-100%";
+  cover.style.display = handler ? "block" : "none";
+  CartIsEmpty();
+}
+
+function buy(handler) {
+  if (cartDetails.length == 0) return;
+  sideNav(!handler);
+  document.getElementsByClassName("purchase-cover")[0].style.display = handler
+    ? "block"
+    : "none";
+  document.getElementsByClassName("order-now")[0].innerHTML = handler
+    ? Purchase()
+    : "";
+}
+
+function order() {
+  let invoice = document.getElementsByClassName("invoice")[0];
+  invoice.style.height = "500px";
+  invoice.style.width = "400px";
+  invoice.innerHTML = OrderConfirm();
+  ToggleBackBtns();
+  Stocks();
+  clearCart();
+}
+
+function okay(event) {
+  let container = document.getElementsByClassName("invoice")[0];
+  if (event.target.innerText == "continue") {
+    container.style.display = "none";
+    document.getElementsByClassName("purchase-cover")[0].style.display = "none";
+  } else {
+    event.target.innerText = "continue";
+    event.target.parentElement.getElementsByClassName(
+      "order-details"
+    )[0].innerHTML = `<em class='thanks'>Thanks for shopping with us</em>`;
+    container.style.height = "180px";
+  }
+}
+//}
+
+// button components for better Ux {
+function AddBtn() {
+  return `
+<div>
+  <button onclick='addItem(this)' class='add-btn'>Add <i class='fas fa-chevron-right'></i></button>
+</div>`;
+}
+
+function QtyBtn(qty = 1) {
+  if (qty == 0) return AddBtn();
+  return `
+<div>
+  <button class='btn-qty' onclick="qtyChange(this,'sub')"><i class='fas fa-chevron-left'></i></button>
+  <p class='qty'>${qty}</p>
+  <button class='btn-qty' onclick="qtyChange(this,'add')"><i class='fas fa-chevron-right'></i></button>
+</div>`;
+}
+//}
+
+//Ui components {
+function Product(product = {}) {
+  let { name, price, imageUrl, heading, des } = product;
+  return `
+<div class='card'>
+  <div class='top-bar'>
+    <i class='fab fa-apple'></i>
+    <em class="stocks">In Stock</em>
+  </div>
+  <div class='img-container'>
+    <img class='product-img' src='${imageUrl}' alt='' />
+    <div class='out-of-stock-cover'><span>Out Of Stock</span></div>
+  </div>
+  <div class='details'>
+    <div class='name-fav'>
+      <strong class='product-name'>${name}</strong>
+      <button onclick='this.classList.toggle("fav")' class='heart'><i class='fas fa-heart'></i></button>
+    </div>
+    <div class='wrapper'>
+      <h5>${heading}</h5>
+      <p>${des}</p>
+    </div>
+    <div class='purchase'>
+      <p class='product-price'>₹ ${price}</p>
+      <span class='btn-add'>${AddBtn()}</span>
+    </div>
+  </div>
+</div>`;
+}
+
+function CartItems(cartItem = {}) {
+  let { name, price, imgSrc, qty } = cartItem;
+  return `
+<div class='cart-item'>
+  <div class='cart-img'>
+    <img src='${imgSrc}' alt='' />
+  </div>
+  <strong class='name'>${name}</strong>
+  <span class='qty-change'>${QtyBtn(qty)}</span>
+  <p class='price'>₹ ${price * qty}</p>
+  <button onclick='removeItem(this)'><i class='fas fa-trash'></i></button>
+</div>`;
+}
+
+function Banner() {
+  return `
+<div class='banner'>
+  <ul class="box-area">
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  </ul>
+  <div class='main-cart'>${DisplayProducts()}</div>
+
+  <div class='nav'>
+    <button onclick='sideNav(1)'><i class='fas fa-shopping-cart' style='font-size:2rem;'></i></button>
+    <span class= 'total-qty'>0</span>
+  </div>
+  <div onclick='sideNav(0)' class='cover'></div>
+  <div class='cover purchase-cover'></div>
+  <div class='cart'>${CartSideNav()}</div>
+  <div class='stock-limit'>
+    <em>You Can Only Buy 10 Items For Each Product</em>
+    <button class='btn-ok' onclick='limitPurchase(this)'>Okay</button>
+  </div>
+<div  class='order-now'></div>
+</div>`;
+}
+
+function CartSideNav() {
+  return `
+<div class='side-nav'>
+  <button onclick='sideNav(0)'><i class='fas fa-times'></i></button>
+  <h2>Cart</h2>
+  <div class='cart-items'></div>
+  <div class='final'>
+    <strong>Total: ₹ <span class='total'>0</span>.00/-</strong>
+    <div class='action'>
+      <button onclick='buy(1)' class='btn buy'>Purchase <i class='fas fa-credit-card' style='color:#6665dd;'></i></button>
+      <button onclick='clearCart()' class='btn clear'>Clear Cart <i class='fas fa-trash' style='color:#bb342f;'></i></button>
+    </div>
+  </div>
+</div>`;
+}
+
+function Purchase() {
+  let toPay = document.getElementsByClassName("total")[0].innerText;
+  let itemNames = cartDetails.map((item) => {
+    return `<span>${item.qty} x ${item.name}</span>`;
+  });
+  let itemPrices = cartDetails.map((item) => {
+    return `<span>₹ ${item.price * item.qty}</span>`;
+  });
+  return `
+<div class='invoice'>
+  <div class='shipping-items'>
+    <div class='item-names'>${itemNames.join("")}</div>
+    <div class='items-price'>${itemPrices.join("+")}</div>
+  </div>
+<hr>
+  <div class='payment'>
+    <em>payment</em>
+    <div>
+      <p>total amount to be paid:</p><span class='pay'>₹ ${toPay}</span>
+    </div>
+  </div>
+  <div class='order'>
+    <button onclick='order()' class='btn-order btn'>Order Now</button>
+    <button onclick='buy(0)' class='btn-cancel btn'>Cancel</button>
+  </div>
+</div>`;
+}
+
+function OrderConfirm() {
+  let orderId = Math.round(Math.random() * 1000);
+  let totalCost = document.getElementsByClassName("total")[0].innerText;
+  return `
+<div>
+  <div class='order-details'>
+    <em>your order has been placed</em>
+    <p>Your order-id is : <span>${orderId}</span></p>
+    <p>your order will be delivered to you in 3-5 working days</p>
+    <p>you can pay <span>₹ ${totalCost}</span> by card or any online transaction method after the products have been dilivered to you</p>
+  </div>
+  <button onclick='okay(event)' class='btn-ok'>okay</button>
+</div>`;
+}
+//}
+
+//updates Ui components {
+function DisplayProducts() {
+  let products = productDetails.map((product) => {
+    return Product(product);
+  });
+  return products.join("");
+}
+
+function DisplayCartItems() {
+  let cartItems = cartDetails.map((cartItem) => {
+    return CartItems(cartItem);
+  });
+  return cartItems.join("");
+}
+
+function RenderCart() {
+  document.getElementsByClassName(
+    "cart-items"
+  )[0].innerHTML = DisplayCartItems();
+}
+
+function SwitchBtns(found) {
+  let element = found.getElementsByClassName("btn-add")[0];
+  element.classList.toggle("qty-change");
+  let hasClass = element.classList.contains("qty-change");
+  found.getElementsByClassName("btn-add")[0].innerHTML = hasClass
+    ? QtyBtn()
+    : AddBtn();
+}
+
+function ToggleBackBtns() {
+  let btns = document.getElementsByClassName("btn-add");
+  for (let btn of btns) {
+    if (btn.classList.contains("qty-change")) {
+      btn.classList.toggle("qty-change");
+    }
+    btn.innerHTML = AddBtn();
+  }
+}
+
+function CartIsEmpty() {
+  let emptyCart = `<span class='empty-cart'>Looks Like You Haven't Added Any Product In The Cart</span>`;
+  if (cartDetails.length == 0) {
+    document.getElementsByClassName("cart-items")[0].innerHTML = emptyCart;
+  }
+}
+
+function CartItemsTotal() {
+  let totalPrice = cartDetails.reduce((totalCost, item) => {
+    return totalCost + item.price * item.qty;
+  }, 0);
+  let totalQty = cartDetails.reduce((total, item) => {
+    return total + item.qty;
+  }, 0);
+  document.getElementsByClassName("total")[0].innerText = totalPrice;
+  document.getElementsByClassName("total-qty")[0].innerText = totalQty;
+}
+
+function Stocks() {
+  cartDetails.forEach((item) => {
+    productDetails.forEach((product) => {
+      if (item.name == product.name && product.qty >= 0) {
+        product.qty -= item.qty;
+        if (product.qty < 0) {
+          product.qty += item.qty;
+          document.getElementsByClassName("invoice")[0].style.height = "180px";
+          document.getElementsByClassName(
+            "order-details"
+          )[0].innerHTML = `<em class='thanks'>Stocks Limit Exceeded</em>`;
+        } else if (product.qty == 0) {
+          OutOfStock(product, 1);
+        } else if (product.qty <= 5) {
+          OutOfStock(product, 0);
+        }
+      }
+    });
+  });
+}
+
+function OutOfStock(product, handler) {
+  let products = document.getElementsByClassName("card");
+  for (let items of products) {
+    let stocks = items.getElementsByClassName("stocks")[0];
+    let name = items.getElementsByClassName("product-name")[0].innerText;
+    if (product.name == name) {
+      if (handler) {
+        items.getElementsByClassName("out-of-stock-cover")[0].style.display =
+          "flex";
+        stocks.style.display = "none";
+      } else {
+        stocks.innerText = "Only Few Left";
+        stocks.style.color = "orange";
       }
     }
+  }
+}
 
-    // ------ Enable Todo done state
-    function clickCheck (element) { // element = checkbox input
-      // in 'todos' where 'id' create/update 'done' to input checked value
-      // todos.get(id).put({done:true/false})
-      user.get('todos').get($(element).parent().attr('id')).put({done: $(element).prop('checked')})
-    }
+function App() {
+  return `
+<div>
+  ${Banner()}
+</div>`;
+}
+//}
 
-    // ------ Enable Todo deletion
-    function clickDelete (element) { // element = delete img
-      // in 'todos' where 'id' set 'null' (deletion in Gun db)
-      // todos.get(id).put({done:true/false})
-      user.get('todos').get($(element).parent().attr('id')).put(null)
-    }
+// injects the rendered component's html
+document.getElementById("app").innerHTML = App();
 
     // handle login event
     gun.on('auth', function(){
       $('#sign-page').hide();
-      $('#todo-page').show();
+      $('#app').show();
       user.get('todos').map().on(UI);
     });
 
